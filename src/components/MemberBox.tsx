@@ -13,7 +13,9 @@ const IconStyles = css`
   border-radius: 3px;
 `;
 
-const Box = styled.div``;
+const Box = styled.div`
+  cursor: pointer;
+`;
 
 const Icon = styled.img`
   ${IconStyles}
