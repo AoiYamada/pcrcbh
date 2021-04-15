@@ -28,7 +28,7 @@ export const MemberBox = ({ id, name, icon, nicknames }: Member) => (
     {icon === "empty" ? (
       <EmptyIcon>+</EmptyIcon>
     ) : (
-      <Icon src={`/images/${icon}`} alt={name}></Icon>
+      <Icon src={`/pcrcbh/images/${icon}`} alt={name}></Icon>
     )}
   </Box>
 );
