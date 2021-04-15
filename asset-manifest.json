@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/pcrcbh/static/css/main.a574a57c.chunk.css",
+    "main.js": "/pcrcbh/static/js/main.b7ce0b83.chunk.js",
+    "main.js.map": "/pcrcbh/static/js/main.b7ce0b83.chunk.js.map",
+    "runtime-main.js": "/pcrcbh/static/js/runtime-main.0654b243.js",
+    "runtime-main.js.map": "/pcrcbh/static/js/runtime-main.0654b243.js.map",
+    "static/js/2.29b67ceb.chunk.js": "/pcrcbh/static/js/2.29b67ceb.chunk.js",
+    "static/js/2.29b67ceb.chunk.js.map": "/pcrcbh/static/js/2.29b67ceb.chunk.js.map",
+    "static/js/3.57b63ac6.chunk.js": "/pcrcbh/static/js/3.57b63ac6.chunk.js",
+    "static/js/3.57b63ac6.chunk.js.map": "/pcrcbh/static/js/3.57b63ac6.chunk.js.map",
+    "index.html": "/pcrcbh/index.html",
+    "static/css/main.a574a57c.chunk.css.map": "/pcrcbh/static/css/main.a574a57c.chunk.css.map",
+    "static/js/2.29b67ceb.chunk.js.LICENSE.txt": "/pcrcbh/static/js/2.29b67ceb.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/pcrcbh/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0654b243.js",
+    "static/js/2.29b67ceb.chunk.js",
+    "static/css/main.a574a57c.chunk.css",
+    "static/js/main.b7ce0b83.chunk.js"
+  ]
+}
