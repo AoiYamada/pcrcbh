@@ -1,5 +1,5 @@
-import { MemberIds } from "../types/Member";
-import { CloseModelCallback } from "../types/SelectionModal";
+import { MemberIds } from "../../types/Member";
+import { CloseModelCallback } from "../../types/SelectionModal";
 
 // Modals
 export const SET_MODAL_SELECTION = "SET_MODAL_SELECTION";
@@ -43,40 +43,5 @@ export const setModalSelection = (ids: MemberIds): SetModalSelectionAction => {
   return {
     type: SET_MODAL_SELECTION,
     ids,
-  };
-};
-
-export const openModal = (
-  ids: MemberIds,
-  closeModalCallback: CloseModelCallback
-): OpenModalAction => {
-  return {
-    type: OPEN_MODAL,
-    isOpened: true,
-    selectedIds: ids,
-    closeModalCallback,
-  };
-};
-
-export const closeModal = (): CloseModalAction => {
-  return {
-    type: CLOSE_MODAL,
-    isOpened: false,
-    selectedIds: [],
-    closeModalCallback: (ids: MemberIds) => {},
-  };
-};
-
-export const addPartyToList = (ids: MemberIds): AddPartyToListAction => {
-  return {
-    type: ADD_PARTY_TO_LIST,
-    ids,
-  };
-};
-
-export const removePartyFromList = (idx: number): RemovePartyFromListAction => {
-  return {
-    type: REMOVE_PARTY_FROM_LIST,
-    idx,
   };
 };
