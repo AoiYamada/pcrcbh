@@ -4,3 +4,5 @@ export type Member = {
   icon: string;
   nicknames: string[];
 };
+
+export type MemberIds = number[];

@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { emptyMembers } from "../constants/characterInfo";
-import { Member } from "../types/Member";
+import { characterInfo, emptyMembers } from "../constants/characterInfo";
+import { SelectionModalContainer } from "../containers/SelectionModalContainer";
+import { PartyActionProps, PartyProps } from "../types/Party";
 import { MemberBox } from "./MemberBox";
 
-const PartyContainer = styled.div`
+const PartyWrapper = styled.div`
   cursor: pointer;
   width: 280px;
   height: 60px;
@@ -17,8 +18,21 @@ const PartyContainer = styled.div`
   padding-right: 3px;
 `;
 
-export const Party = (members: Member[], openModal: () => void) => (
-  <PartyContainer onClick={openModal}>
-    {[...members, ...emptyMembers].slice(0, 5).map(MemberBox)}
-  </PartyContainer>
+const getCharacterInfo = (id: number) => characterInfo[id];
+
+export const Party = ({
+  memberIds,
+  setMemberIds,
+  openModal,
+}: PartyProps & PartyActionProps) => (
+  <>
+    <PartyWrapper
+      onClick={() => openModal(memberIds, (ids) => setMemberIds(ids))}
+    >
+      {[...memberIds.map(getCharacterInfo), ...emptyMembers]
+        .slice(0, 5)
+        .map(MemberBox)}
+    </PartyWrapper>
+    <SelectionModalContainer></SelectionModalContainer>
+  </>
 );

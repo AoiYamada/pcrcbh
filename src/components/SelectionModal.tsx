@@ -1,9 +1,12 @@
-import { MouseEvent, Dispatch, SetStateAction } from "react";
+import { MouseEvent } from "react";
 import styled from "styled-components";
 
 import { MemberBox } from "./MemberBox";
 import { allMembers } from "../constants/characterInfo";
-import { useState } from "react";
+import {
+  SelectionModalActionProps,
+  SelectionModalProps,
+} from "../types/SelectionModal";
 
 const Overlay = styled.div`
   width: 100vw;
@@ -16,8 +19,8 @@ const Overlay = styled.div`
   z-index: 100;
   cursor: pointer;
   position: fixed;
-  display: ${({ modalIsOpen }: { modalIsOpen: boolean }) =>
-    modalIsOpen ? "flex" : "none"};
+  display: ${({ isOpened }: { isOpened: boolean }) =>
+    isOpened ? "flex" : "none"};
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -64,51 +67,52 @@ const ItemWrapper = styled.div`
     isSelected ? 1 : 0.5};
 `;
 
-export const SelectionModal = (
-  modalIsOpen: boolean,
-  // afterOpenModal: (
-  //   setIsSelectedStates: Dispatch<SetStateAction<boolean[]>>
-  // ) => void,
-  closeModal: (ids: number[]) => void
-) => {
-  const [isSelectedStates, setIsSelectedStates] = useState<boolean[]>(
-    allMembers.map(() => false)
-  );
+export const SelectionModal = ({
+  isOpened,
+  selectedIds,
+  closeModal,
+  closeModalCallback,
+  setModalSelection,
+}: SelectionModalProps & SelectionModalActionProps) => {
+  const selectedIdsMap = new Map(selectedIds.map((id) => [id, true]));
 
-  const handleMemberBoxClicked = (idx: number) => (
+  const handleMemberBoxClicked = (id: number) => (
     e: MouseEvent<HTMLElement>
   ) => {
     e.stopPropagation();
 
-    const selectedCount = isSelectedStates.filter((isSelected) => isSelected)
-      .length;
+    const selectedCount = selectedIds.length;
 
-    setIsSelectedStates([
-      ...isSelectedStates.slice(0, idx),
-      !isSelectedStates[idx] && selectedCount < 5,
-      ...isSelectedStates.slice(idx + 1),
-    ]);
+    if (selectedIdsMap.delete(id)) {
+      setModalSelection(Array.from(selectedIdsMap.keys()));
+      return;
+    }
+
+    if (selectedCount >= 5) {
+      return;
+    }
+
+    setModalSelection([...selectedIds, id].sort((a, b) => a - b));
   };
 
-  const handleClose = () =>
-    closeModal(
-      isSelectedStates.reduce<number[]>((ids, isSelected, idx) => {
-        if (isSelected) {
-          ids.push(allMembers[idx].id);
-        }
+  const handleClose = () => {
+    closeModalCallback(selectedIds);
+    closeModal();
+  };
 
-        return ids;
-      }, [])
-    );
   return (
-    <Overlay modalIsOpen={modalIsOpen} onClick={handleClose}>
-      <Modal onClick={(e) => e.stopPropagation()}>
+    <Overlay isOpened={isOpened} onClick={handleClose}>
+      <Modal
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <ItemContainer>
-          {allMembers.map((member, idx) => (
+          {allMembers.map((member) => (
             <ItemWrapper
-              isSelected={isSelectedStates[idx]}
-              key={`selection-${member.id}`}
-              onClick={handleMemberBoxClicked(idx)}
+              isSelected={selectedIdsMap.has(member.id)}
+              key={member.id}
+              onClick={handleMemberBoxClicked(member.id)}
             >
               {MemberBox(member)}
             </ItemWrapper>
