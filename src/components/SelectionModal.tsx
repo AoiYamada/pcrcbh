@@ -27,7 +27,7 @@ const Overlay = styled.div`
 `;
 
 const Modal = styled.div`
-  max-width: 90%;
+  max-width: 80%;
   background-color: #ffffff;
   display: flex;
   flex-basis: content;
@@ -43,7 +43,7 @@ const Modal = styled.div`
 
 const ItemContainer = styled.div`
   width: 100%;
-  max-height: 600px;
+  max-height: 350px;
   overflow: auto;
   display: flex;
   flex-basis: content;
