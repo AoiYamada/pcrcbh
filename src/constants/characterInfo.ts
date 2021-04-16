@@ -1,3 +1,5 @@
+import * as R from "ramda";
+
 import { Member } from "../types/Member";
 
 export const characterInfo: {
@@ -937,3 +939,5 @@ export const emptyMembers: Member[] = [
     nicknames: [],
   },
 ];
+
+export const allMembers = R.values(characterInfo);

@@ -1,9 +1,8 @@
-import { MouseEvent } from "react";
+import { MouseEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import * as R from "ramda";
 
 import { MemberBox } from "./MemberBox";
-import { characterInfo } from "../constants/characterInfo";
+import { allMembers } from "../constants/characterInfo";
 import { useState } from "react";
 
 const Overlay = styled.div`
@@ -30,7 +29,7 @@ const Modal = styled.div`
   display: flex;
   flex-basis: content;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
@@ -41,6 +40,8 @@ const Modal = styled.div`
 
 const ItemContainer = styled.div`
   width: 100%;
+  max-height: 600px;
+  overflow: auto;
   display: flex;
   flex-basis: content;
   flex-direction: row;
@@ -51,7 +52,7 @@ const ItemContainer = styled.div`
 
 const ButtonContainer = styled.div`
   width: 100%;
-  height: 30px;
+  flex-basis: 50px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -65,9 +66,11 @@ const ItemWrapper = styled.div`
 
 export const SelectionModal = (
   modalIsOpen: boolean,
+  // afterOpenModal: (
+  //   setIsSelectedStates: Dispatch<SetStateAction<boolean[]>>
+  // ) => void,
   closeModal: (ids: number[]) => void
 ) => {
-  const allMembers = R.values(characterInfo);
   const [isSelectedStates, setIsSelectedStates] = useState<boolean[]>(
     allMembers.map(() => false)
   );
@@ -97,7 +100,6 @@ export const SelectionModal = (
         return ids;
       }, [])
     );
-
   return (
     <Overlay modalIsOpen={modalIsOpen} onClick={handleClose}>
       <Modal onClick={(e) => e.stopPropagation()}>
