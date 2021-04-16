@@ -1,4 +1,4 @@
-import { MemberIds } from "./Member";
+import { Member, MemberIds } from "./Member";
 
 export type SelectionModalProps = {
   isOpened: boolean;
@@ -9,7 +9,7 @@ export type SelectionModalProps = {
 export type SelectionModalActionProps = {
   openModal: (ids: MemberIds, closeModalCallback: CloseModelCallback) => void;
   closeModal: () => void;
-  setModalSelection: (ids: MemberIds) => void;
+  selectMember: (id: Member["id"]) => void;
 };
 
 export type CloseModelCallback = (ids: MemberIds) => void;

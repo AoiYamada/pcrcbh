@@ -33,7 +33,7 @@ export const Modal = styled.div`
   z-index: 200;
 `;
 
-export const ItemContainer = styled.div`
+export const ItemsContainer = styled.div`
   width: 100%;
   max-height: 350px;
   overflow: auto;

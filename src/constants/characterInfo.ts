@@ -907,37 +907,4 @@ export const characterInfo: {
   },
 };
 
-export const emptyMembers: Member[] = [
-  {
-    id: 1,
-    name: "empty",
-    icon: "empty",
-    nicknames: [],
-  },
-  {
-    id: 2,
-    name: "empty",
-    icon: "empty",
-    nicknames: [],
-  },
-  {
-    id: 3,
-    name: "empty",
-    icon: "empty",
-    nicknames: [],
-  },
-  {
-    id: 4,
-    name: "empty",
-    icon: "empty",
-    nicknames: [],
-  },
-  {
-    id: 5,
-    name: "empty",
-    icon: "empty",
-    nicknames: [],
-  },
-];
-
 export const allMembers = R.values(characterInfo);

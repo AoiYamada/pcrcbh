@@ -1,10 +1,9 @@
-import { characterInfo, emptyMembers } from "../constants/characterInfo";
 import { SelectionModalContainer } from "../containers/SelectionModalContainer";
 import { PartyActionProps, PartyProps } from "../types/Party";
 import { MemberBox } from "./MemberBox";
 import { PartyWrapper } from "./styles/PartyComponents";
 
-const getCharacterInfo = (id: number) => characterInfo[id];
+const empties = [null, null, null, null, null];
 
 export const Party = ({
   memberIds,
@@ -15,9 +14,7 @@ export const Party = ({
     <PartyWrapper
       onClick={() => openModal(memberIds, (ids) => setMemberIds(ids))}
     >
-      {[...memberIds.map(getCharacterInfo), ...emptyMembers]
-        .slice(0, 5)
-        .map(MemberBox)}
+      {[...memberIds, ...empties].slice(0, 5).map(MemberBox)}
     </PartyWrapper>
     <SelectionModalContainer></SelectionModalContainer>
   </>

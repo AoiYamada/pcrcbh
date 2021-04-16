@@ -6,10 +6,10 @@ import {
   CloseModalAction,
   openModal,
   OpenModalAction,
-  setModalSelection,
-  SetModalSelectionAction,
+  selectMember,
+  SelectMemberAction,
 } from "../redux/actions";
-import { MemberIds } from "../types/Member";
+import { Member, MemberIds } from "../types/Member";
 import {
   CloseModelCallback,
   SelectionModalProps,
@@ -18,9 +18,7 @@ import {
 const mapStateToProps = ({ modal }: { modal: SelectionModalProps }) => modal;
 
 const mapDispatchToProps = (
-  dispatch: Dispatch<
-    OpenModalAction | CloseModalAction | SetModalSelectionAction
-  >
+  dispatch: Dispatch<OpenModalAction | CloseModalAction | SelectMemberAction>
 ) => ({
   openModal(ids: MemberIds, closeModalCallback: CloseModelCallback): void {
     dispatch(openModal(ids, closeModalCallback));
@@ -28,8 +26,8 @@ const mapDispatchToProps = (
   closeModal(): void {
     dispatch(closeModal());
   },
-  setModalSelection(ids: MemberIds): void {
-    dispatch(setModalSelection(ids));
+  selectMember(id: Member["id"]): void {
+    dispatch(selectMember(id));
   },
 });
 

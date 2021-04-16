@@ -1,4 +1,4 @@
-import { MemberIds } from "../../types/Member";
+import { Member, MemberIds } from "../../types/Member";
 import { CloseModelCallback } from "../../types/SelectionModal";
 import {
   AddPartyToListAction,
@@ -9,7 +9,16 @@ import {
   OPEN_MODAL,
   RemovePartyFromListAction,
   REMOVE_PARTY_FROM_LIST,
+  SelectMemberAction,
+  SELECT_MEMBER,
 } from "./types";
+
+export const selectMember = (id: Member["id"]): SelectMemberAction => {
+  return {
+    type: SELECT_MEMBER,
+    id,
+  };
+};
 
 export const openModal = (
   ids: MemberIds,

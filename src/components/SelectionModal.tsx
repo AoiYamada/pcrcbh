@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useCallback } from "react";
 
 import { MemberBox } from "./MemberBox";
 import { allMembers } from "../constants/characterInfo";
@@ -8,7 +8,7 @@ import {
 } from "../types/SelectionModal";
 import {
   ButtonContainer,
-  ItemContainer,
+  ItemsContainer,
   ItemWrapper,
   Modal,
   Overlay,
@@ -19,28 +19,17 @@ export const SelectionModal = ({
   selectedIds,
   closeModal,
   closeModalCallback,
-  setModalSelection,
+  selectMember,
 }: SelectionModalProps & SelectionModalActionProps) => {
   const selectedIdsMap = new Map(selectedIds.map((id) => [id, true]));
 
-  const handleMemberBoxClicked = (id: number) => (
-    e: MouseEvent<HTMLElement>
-  ) => {
-    e.stopPropagation();
-
-    const selectedCount = selectedIds.length;
-
-    if (selectedIdsMap.delete(id)) {
-      setModalSelection(Array.from(selectedIdsMap.keys()));
-      return;
-    }
-
-    if (selectedCount >= 5) {
-      return;
-    }
-
-    setModalSelection([...selectedIds, id].sort((a, b) => a - b));
-  };
+  const handleMemberBoxClicked = useCallback(
+    (id: number) => (e: MouseEvent<HTMLElement>) => {
+      e.stopPropagation();
+      selectMember(id);
+    },
+    [selectMember]
+  );
 
   const handleClose = () => {
     closeModalCallback(selectedIds);
@@ -54,17 +43,17 @@ export const SelectionModal = ({
           e.stopPropagation();
         }}
       >
-        <ItemContainer>
-          {allMembers.map((member) => (
+        <ItemsContainer>
+          {allMembers.map(({ id }, idx) => (
             <ItemWrapper
-              isSelected={selectedIdsMap.has(member.id)}
-              key={member.id}
-              onClick={handleMemberBoxClicked(member.id)}
+              isSelected={selectedIdsMap.has(id)}
+              key={idx}
+              onClick={handleMemberBoxClicked(id)}
             >
-              {MemberBox(member)}
+              {MemberBox(id, idx)}
             </ItemWrapper>
           ))}
-        </ItemContainer>
+        </ItemsContainer>
         <ButtonContainer>
           <button onClick={handleClose}>選擇</button>
         </ButtonContainer>

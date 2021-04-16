@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import { SelectionModalProps } from "../types/SelectionModal";
 import {
-  SetModalSelectionAction,
-  SET_MODAL_SELECTION,
   OPEN_MODAL,
   OpenModalAction,
   CloseModalAction,
   CLOSE_MODAL,
+  SelectMemberAction,
+  SELECT_MEMBER,
 } from "./actions";
 
 const selectionModalInitState: SelectionModalProps = {
@@ -17,16 +17,29 @@ const selectionModalInitState: SelectionModalProps = {
 
 const modalReducer = (
   state = selectionModalInitState,
-  action: SetModalSelectionAction | OpenModalAction | CloseModalAction
+  action: SelectMemberAction | OpenModalAction | CloseModalAction
 ): SelectionModalProps => {
   const { type } = action;
   switch (type) {
-    case SET_MODAL_SELECTION:
-      const { ids } = action as SetModalSelectionAction;
+    case SELECT_MEMBER:
+      const { id } = action as SelectMemberAction;
+      const selectedIdsMap = new Map(state.selectedIds.map((id) => [id, true]));
+      const selectedCount = state.selectedIds.length;
+
+      if (selectedIdsMap.delete(id)) {
+        return {
+          ...state,
+          selectedIds: Array.from(selectedIdsMap.keys()),
+        };
+      }
+
+      if (selectedCount >= 5) {
+        return state;
+      }
 
       return {
         ...state,
-        selectedIds: ids,
+        selectedIds: [...state.selectedIds, id].sort((a, b) => a - b),
       };
     case OPEN_MODAL:
     case CLOSE_MODAL:
