@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ListItemWrapper = styled.div`
-  width: 330px;
+  width: ${({ width }: { width?: string }) => (width ? width : "280px")};
   height: 60px;
   display: flex;
   flex-direction: row;

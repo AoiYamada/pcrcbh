@@ -5,6 +5,7 @@ import { CloseModelCallback } from "./SelectionModal";
 export type PartyProps = {
   memberIds: MemberIds;
   setMemberIds?: Dispatch<SetStateAction<MemberIds>>;
+  size?: number;
 };
 
 export type BattlePartyFormProps = {

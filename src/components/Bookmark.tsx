@@ -1,5 +1,5 @@
+import { PartyContainer } from "../containers/PartyContainer";
 import { ListActionProps, ListProps } from "../types/Bookmark";
-import { Party } from "./Party";
 import { ListItemWrapper } from "./styles/ListComponents";
 
 export const Bookmark = ({
@@ -8,16 +8,20 @@ export const Bookmark = ({
 }: ListProps & ListActionProps) => {
   return (
     <div>
-      {items.map((ids, idx) => (
-        <ListItemWrapper key={idx}>
-          <Party memberIds={ids}></Party>
-          <button
-            onClick={() => removePartyFromList && removePartyFromList(idx)}
-          >
-            x
-          </button>
-        </ListItemWrapper>
-      ))}
+      {items.length ? (
+        items.map((ids, idx) => (
+          <ListItemWrapper key={idx} width="300px">
+            <PartyContainer memberIds={ids}></PartyContainer>
+            <button
+              onClick={() => removePartyFromList && removePartyFromList(idx)}
+            >
+              x
+            </button>
+          </ListItemWrapper>
+        ))
+      ) : (
+        <div>Empty</div>
+      )}
     </div>
   );
 };

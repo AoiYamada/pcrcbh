@@ -11,7 +11,7 @@ export const BattlePartyForm = ({
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
   return (
-    <ListItemWrapper>
+    <ListItemWrapper width="300px">
       <PartyContainer
         memberIds={memberIds}
         setMemberIds={setMemberIds}

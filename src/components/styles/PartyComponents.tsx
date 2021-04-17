@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PartyWrapper = styled.div`
   cursor: pointer;
-  width: 280px;
+  width: ${({ size }: { size: number }) => `${30 + 50 * size}px`};
   height: 60px;
   display: flex;
   flex-direction: row;

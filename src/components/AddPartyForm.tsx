@@ -9,7 +9,7 @@ export const AddPartyForm = ({
   addPartyToList,
 }: PartyProps & PartyActionProps & ListActionProps) => {
   return (
-    <ListItemWrapper>
+    <ListItemWrapper width="330px">
       <PartyContainer
         memberIds={memberIds}
         setMemberIds={setMemberIds}

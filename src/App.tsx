@@ -1,12 +1,13 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
+import * as R from "ramda";
 
 import "./App.css";
 import { BattlePartyForm } from "./components/BattlePartyForm";
 import { AddPartyFormContainer } from "./containers/AddPartyFormContainer";
 import { BookmarkContainer } from "./containers/BookmarkContainer";
-import { PartyContainer } from "./containers/PartyContainer";
 import { SelectionModalContainer } from "./containers/SelectionModalContainer";
+import { Party } from "./components/Party";
 
 const fullSizeStyle = css`
   width: 100%;
@@ -59,6 +60,25 @@ const RightMain = styled.div`
   align-items: center;
 `;
 
+const ErrorMessage = styled.div`
+  display: ${({ shouldShow }: { shouldShow: boolean }) =>
+    shouldShow ? "block" : "none"};
+  width: 100%;
+  height: 150px;
+  line-height: 60px;
+  color: red;
+`;
+
+const BorrowBox = styled.div`
+  display: ${({ shouldShow }: { shouldShow: boolean }) =>
+    shouldShow ? "flex" : "none"};
+  width: 100%;
+  height: 150px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 function App() {
   const [addPartyIds, setAddPartyIds] = useState<number[]>([]);
   const [party1Ids, setParty1Ids] = useState<number[]>([]);
@@ -67,6 +87,43 @@ function App() {
   // const [compensate1Ids, setCompensate1Ids] = useState<number[]>([]);
   // const [compensate2Ids, setCompensate2Ids] = useState<number[]>([]);
   // const [compensate3Ids, setCompensate3Ids] = useState<number[]>([]);
+
+  const borrowIds: number[][] = [];
+
+  const occurrence = R.countBy(R.identity, [
+    ...party1Ids,
+    ...party2Ids,
+    ...party3Ids,
+  ]);
+
+  [party1Ids, party2Ids, party3Ids].forEach((partyIds) => {
+    const currentBorrowIds: number[] = [];
+
+    partyIds.forEach((id) => {
+      if (occurrence[id] > 1) {
+        currentBorrowIds.push(id);
+        occurrence[id] -= 1;
+      }
+    });
+
+    borrowIds.push(currentBorrowIds);
+  });
+
+  let shouldBorrow: boolean;
+  let shouldBorrowIds: number[] = [];
+
+  const maxPartyOccurrence = R.pipe(
+    R.map<number[], number>(R.length),
+    (lengths) => Math.max(...lengths)
+  )(borrowIds);
+
+  shouldBorrow = maxPartyOccurrence < 3;
+
+  if (shouldBorrow) {
+    shouldBorrowIds = R.flatten(borrowIds);
+
+    shouldBorrow = shouldBorrowIds.length < 4;
+  }
 
   return (
     <div className="App">
@@ -107,6 +164,20 @@ function App() {
           memberIds={compensate3Ids}
           setMemberIds={setCompensate3Ids}
         ></BattlePartyForm> */}
+          <BorrowBox shouldShow={shouldBorrow}>
+            {shouldBorrowIds.length ? (
+              <>
+                <div>租借列表</div>
+                <Party
+                  memberIds={shouldBorrowIds}
+                  size={shouldBorrowIds.length}
+                ></Party>
+              </>
+            ) : (
+              <div>不需租借</div>
+            )}
+          </BorrowBox>
+          <ErrorMessage shouldShow={!shouldBorrow}>租借角色衝突</ErrorMessage>
         </RightMain>
       </LRSplitMain>
       <footer>

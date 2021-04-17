@@ -2,20 +2,22 @@ import { PartyActionProps, PartyProps } from "../types/Party";
 import { MemberBox } from "./MemberBox";
 import { PartyWrapper } from "./styles/PartyComponents";
 
-const empties = [null, null, null, null, null];
-
 export const Party = ({
   memberIds,
   setMemberIds,
   openModal,
+  size = 5,
 }: PartyProps & PartyActionProps) => (
   <PartyWrapper
+    size={size}
     onClick={
-      setMemberIds && openModal
+      openModal && setMemberIds
         ? () => openModal(memberIds, (ids) => setMemberIds(ids))
         : () => {}
     }
   >
-    {[...memberIds, ...empties].slice(0, 5).map(MemberBox)}
+    {[...memberIds, ...Array.from({ length: size }, () => null)]
+      .slice(0, size)
+      .map(MemberBox)}
   </PartyWrapper>
 );
