@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled, { css } from "styled-components";
 
 import "./App.css";
+import { BattlePartyForm } from "./components/BattlePartyForm";
 import { AddPartyFormContainer } from "./containers/AddPartyFormContainer";
 import { BookmarkContainer } from "./containers/BookmarkContainer";
 import { PartyContainer } from "./containers/PartyContainer";
@@ -27,7 +28,6 @@ const LeftMain = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: solid 1px;
 `;
 
 const LeftUpMain = styled.div`
@@ -37,7 +37,7 @@ const LeftUpMain = styled.div`
   justify-content: center;
   align-items: center;
   flex-basis: 200px;
-  border: solid 1px;
+  border: solid 1px 1px 0px 1px;
 `;
 
 const LeftDownMain = styled.div`
@@ -47,6 +47,7 @@ const LeftDownMain = styled.div`
   justify-content: center;
   align-items: center;
   border: solid 1px;
+  overflow: auto;
 `;
 
 const RightMain = styled.div`
@@ -82,30 +83,30 @@ function App() {
           </LeftDownMain>
         </LeftMain>
         <RightMain>
-          <PartyContainer
+          <BattlePartyForm
             memberIds={party1Ids}
             setMemberIds={setParty1Ids}
-          ></PartyContainer>
-          {/* <PartyContainer
+          ></BattlePartyForm>
+          {/* <BattlePartyForm
           memberIds={compensate1Ids}
           setMemberIds={setCompensate1Ids}
-        ></PartyContainer> */}
-          <PartyContainer
+        ></BattlePartyForm> */}
+          <BattlePartyForm
             memberIds={party2Ids}
             setMemberIds={setParty2Ids}
-          ></PartyContainer>
-          {/* <PartyContainer
+          ></BattlePartyForm>
+          {/* <BattlePartyForm
           memberIds={compensate2Ids}
           setMemberIds={setCompensate2Ids}
-        ></PartyContainer> */}
-          <PartyContainer
+        ></BattlePartyForm> */}
+          <BattlePartyForm
             memberIds={party3Ids}
             setMemberIds={setParty3Ids}
-          ></PartyContainer>
-          {/* <PartyContainer
+          ></BattlePartyForm>
+          {/* <BattlePartyForm
           memberIds={compensate3Ids}
           setMemberIds={setCompensate3Ids}
-        ></PartyContainer> */}
+        ></BattlePartyForm> */}
         </RightMain>
       </LRSplitMain>
       <footer>

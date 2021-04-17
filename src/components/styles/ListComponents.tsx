@@ -5,4 +5,5 @@ export const ListItemWrapper = styled.div`
   height: 60px;
   display: flex;
   flex-direction: row;
+  user-select: none;
 `;

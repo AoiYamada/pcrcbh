@@ -14,6 +14,7 @@ export const IconStyles = css`
 
 export const Box = styled.div`
   cursor: pointer;
+  user-select: none;
 `;
 
 export const Icon = styled.img`

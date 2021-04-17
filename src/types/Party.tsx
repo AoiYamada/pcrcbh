@@ -7,6 +7,11 @@ export type PartyProps = {
   setMemberIds?: Dispatch<SetStateAction<MemberIds>>;
 };
 
+export type BattlePartyFormProps = {
+  memberIds: MemberIds;
+  setMemberIds: Dispatch<SetStateAction<MemberIds>>;
+};
+
 export type PartyActionProps = {
   openModal?: (ids: MemberIds, closeModalCallback: CloseModelCallback) => void;
 };

@@ -30,6 +30,7 @@ export const Modal = styled.div`
   border-radius: 10px;
   padding: 10px;
   cursor: default;
+  user-select: none;
   z-index: 200;
 `;
 

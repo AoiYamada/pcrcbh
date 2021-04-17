@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { ListProps } from "../types/Bookmark";
-import { SelectionModalProps } from "../types/SelectionModal";
+import { ListProps } from "../../types/Bookmark";
+import { SelectionModalProps } from "../../types/SelectionModal";
 import {
   OPEN_MODAL,
   OpenModalAction,
@@ -12,15 +12,15 @@ import {
   AddPartyToListAction,
   RemovePartyFromListAction,
   REMOVE_PARTY_FROM_LIST,
-} from "./actions";
+} from "../actions";
 
-const selectionModalInitState: SelectionModalProps = {
+export const selectionModalInitState: SelectionModalProps = {
   isOpened: false,
   selectedIds: [],
   closeModalCallback: (ids) => {},
 };
 
-const listInitState: ListProps = {
+export const listInitState: ListProps = {
   items: [],
 };
 
