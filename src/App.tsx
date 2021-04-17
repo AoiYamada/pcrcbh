@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import "./App.css";
 import { PartyContainer } from "./containers/PartyContainer";
+import { SelectionModalContainer } from "./containers/SelectionModalContainer";
 
 function App() {
   // const [modalIsOpen, setIsOpen] = useState(false);
@@ -45,6 +46,9 @@ function App() {
           setMemberIds={setCompensate3Ids}
         ></PartyContainer>
       </main>
+      <footer>
+        <SelectionModalContainer></SelectionModalContainer>
+      </footer>
     </div>
   );
 }
