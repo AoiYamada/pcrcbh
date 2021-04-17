@@ -10,7 +10,11 @@ export const Party = ({
   openModal,
 }: PartyProps & PartyActionProps) => (
   <PartyWrapper
-    onClick={() => openModal(memberIds, (ids) => setMemberIds(ids))}
+    onClick={
+      setMemberIds && openModal
+        ? () => openModal(memberIds, (ids) => setMemberIds(ids))
+        : () => {}
+    }
   >
     {[...memberIds, ...empties].slice(0, 5).map(MemberBox)}
   </PartyWrapper>

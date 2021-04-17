@@ -4,9 +4,9 @@ import { CloseModelCallback } from "./SelectionModal";
 
 export type PartyProps = {
   memberIds: MemberIds;
-  setMemberIds: Dispatch<SetStateAction<MemberIds>>;
+  setMemberIds?: Dispatch<SetStateAction<MemberIds>>;
 };
 
 export type PartyActionProps = {
-  openModal: (ids: MemberIds, closeModalCallback: CloseModelCallback) => void;
+  openModal?: (ids: MemberIds, closeModalCallback: CloseModelCallback) => void;
 };

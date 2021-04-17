@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { ListProps } from "../types/Bookmark";
 import { SelectionModalProps } from "../types/SelectionModal";
 import {
   OPEN_MODAL,
@@ -7,12 +8,20 @@ import {
   CLOSE_MODAL,
   SelectMemberAction,
   SELECT_MEMBER,
+  ADD_PARTY_TO_LIST,
+  AddPartyToListAction,
+  RemovePartyFromListAction,
+  REMOVE_PARTY_FROM_LIST,
 } from "./actions";
 
 const selectionModalInitState: SelectionModalProps = {
   isOpened: false,
   selectedIds: [],
   closeModalCallback: (ids) => {},
+};
+
+const listInitState: ListProps = {
+  items: [],
 };
 
 const modalReducer = (
@@ -57,6 +66,33 @@ const modalReducer = (
   }
 };
 
+const listReducer = (
+  state = listInitState,
+  action: AddPartyToListAction | RemovePartyFromListAction
+) => {
+  const { type } = action;
+  switch (type) {
+    case ADD_PARTY_TO_LIST:
+      const { ids } = action as AddPartyToListAction;
+
+      return {
+        items: [ids, ...state.items],
+      };
+    case REMOVE_PARTY_FROM_LIST:
+      const { idx } = action as RemovePartyFromListAction;
+
+      console.log(state.items);
+      console.log(idx);
+
+      return {
+        items: [...state.items.slice(0, idx), ...state.items.slice(idx + 1)],
+      };
+    default:
+      return state;
+  }
+};
+
 export const reducer = combineReducers({
   modal: modalReducer,
+  list: listReducer,
 });
