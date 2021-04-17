@@ -36,7 +36,7 @@ export const Modal = styled.div`
 
 export const ItemsContainer = styled.div`
   width: 100%;
-  max-height: 350px;
+  max-height: 50vh;
   overflow: auto;
   display: flex;
   flex-basis: content;
